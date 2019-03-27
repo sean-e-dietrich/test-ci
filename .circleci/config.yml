@@ -3,6 +3,7 @@ jobs:
   build:
     working_directory: /var/www
     docker:
+      - image: busybox
       - image: docksal/cli:2-php7.2
       - image: docksal/mysql:5.6-1.4
         environment:
