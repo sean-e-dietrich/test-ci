@@ -11,6 +11,14 @@ jobs:
       - run:
           name: Fin Version
           command: fin --version
+      - run:
+          name: Create Project
+          command: fin project create -y --name=test-project --choice=1
+      - run:
+          name: Test Project
+          command: |
+            cd test-project
+            fin test
 #       - setup_remote_docker:
 #           version: '18.09.0'
 #       - run:
