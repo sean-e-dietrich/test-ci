@@ -1,22 +1,16 @@
 version: 2
 jobs:
   build:
-    working_directory: /var/www
-    docker:
-      - image: busybox
-      - image: docksal/cli:2-php7.2
-        command: [supervisord]
-      - image: docksal/mysql:5.6-1.4
-        command: [mysqld]
-        environment:
-          - MYSQL_ROOT_PASSWORD=root
-          - MYSQL_ALLOW_EMPTY_PASSWORD=0
-          - MYSQL_RANDOM_ROOT_PASSWORD=0
-      - image: docksal/apache:2.4-2.3
-        command: [httpd-foreground]
+    working_directory: ~/project
+    machine: true
     steps:
-      - run: rm -rf /var/www
       - checkout
+      - run:
+          name: Install Docksal
+          command: curl -fsSL get.docksal.io | bash
+      - run:
+          name: Fin Version
+          command: fin --version
 #       - setup_remote_docker:
 #           version: '18.09.0'
 #       - run:
