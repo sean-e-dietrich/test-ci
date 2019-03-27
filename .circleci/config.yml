@@ -5,12 +5,15 @@ jobs:
     docker:
       - image: busybox
       - image: docksal/cli:2-php7.2
+        command: [supervisord]
       - image: docksal/mysql:5.6-1.4
+        command: [mysqld]
         environment:
           - MYSQL_ROOT_PASSWORD=root
           - MYSQL_ALLOW_EMPTY_PASSWORD=0
           - MYSQL_RANDOM_ROOT_PASSWORD=0
       - image: docksal/apache:2.4-2.3
+        command: [httpd-foreground]
     steps:
       - run: rm -rf /var/www
       - checkout
